@@ -140,7 +140,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-bottom;
+  justify-content: flex-start;
 }
 
 #dialogArea {
@@ -160,12 +160,11 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 /* 選項區固定高度 */
 #choices {
   width: 100%;
-  min-height: 160px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
+  min-height: 160px;
   visibility: hidden;
   opacity: 0;
 }
@@ -664,7 +663,7 @@ $(document).one(&#39;:passagedisplay&#39;, function () {
     lines = [
       &quot; 你順利和小茗碰面。&quot;,
       &quot; 簡單寒暄幾句後，&quot;,
-      &quot; 她笑著問你。&quot;,
+      &quot; 她笑著問你：&quot;,
       &quot;「小餅今天想吃什麼呢？」&quot;
     ];
 
@@ -1622,7 +1621,7 @@ $(document).one(&#39;:passagedisplay&#39;, function () {
     giftLines = [
       &quot;她抱著花，輕輕聞了一下。&quot;,
       &quot;「好漂亮。」&quot;,
-      &quot;她低頭聞了聞，笑得很開心。&quot;
+      &quot;她笑得很開心。&quot;
     ];
   } else if (gift === &quot;dog&quot;) {
     giftLines = [
@@ -2229,30 +2228,19 @@ $(document).one(&#39;:passagedisplay&#39;, function () {
   width: 0 !important;
   margin: 0 !important;
 }
-&lt;/style&gt;</tw-passagedata><tw-passagedata pid="26" name="Final1" tags="" position="875,1450" size="100,100">&lt;div id=&quot;scene&quot;&gt;
-  &lt;div class=&quot;top&quot;&gt;&lt;/div&gt;
-
-  &lt;div class=&quot;bottom&quot;&gt;
-    &lt;div id=&quot;dialogArea&quot;&gt;
-      &lt;div id=&quot;textBox&quot;&gt;&lt;/div&gt;
-
-      &lt;div id=&quot;choices&quot;&gt;
-        [[The End-&gt;Final]]
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+&lt;/style&gt;</tw-passagedata><tw-passagedata pid="26" name="Final1" tags="" position="875,1450" size="100,100">&lt;div id=&quot;scene&quot;&gt;&lt;div class=&quot;top&quot;&gt;&lt;img id=&quot;phoneAnim&quot; src=&quot;images/curry1.png&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bottom&quot;&gt;&lt;div id=&quot;dialogArea&quot;&gt;&lt;div id=&quot;textBox&quot;&gt;&lt;/div&gt;&lt;div id=&quot;choices&quot;&gt;[[The End-&gt;Final]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;&lt;script&gt;&gt;
 $(document).one(&#39;:passagedisplay&#39;, function () {
 
-  // 清除上一頁動畫
   if (window.phoneAnimTimer) {
     clearInterval(window.phoneAnimTimer);
     clearTimeout(window.phoneAnimTimer);
   }
 
-  // 打字機文字
+  $(&quot;#phoneAnim&quot;).attr(&quot;src&quot;, &quot;images/curry1.png&quot;);
+  $(&quot;#phoneAnim&quot;).css(&quot;opacity&quot;, &quot;0&quot;);
+
   const lines = [
     &quot;這一天，&quot;,
     &quot;就這樣畫下了句點。&quot;,
@@ -2272,9 +2260,7 @@ $(document).one(&#39;:passagedisplay&#39;, function () {
   function typeLine() {
 
     if (lineIndex &gt;= lines.length) {
-      $(&quot;#choices&quot;)
-        .css(&quot;visibility&quot;, &quot;visible&quot;)
-        .animate({ opacity: 1 }, 800);
+      $(&quot;#choices&quot;).css(&quot;visibility&quot;, &quot;visible&quot;).animate({ opacity: 1 }, 300);
       return;
     }
 
@@ -2292,16 +2278,15 @@ $(document).one(&#39;:passagedisplay&#39;, function () {
 
     } else {
 
-      setTimeout(function () {
+      setTimeout(() =&gt; {
         lineIndex++;
         charIndex = 0;
         typeLine();
-      }, 1000);
-
+      }, 900);
     }
   }
 
-  setTimeout(typeLine, 800);
+  setTimeout(typeLine, 1200);
 
 });
 &lt;&lt;/script&gt;&gt;</tw-passagedata></tw-storydata>
